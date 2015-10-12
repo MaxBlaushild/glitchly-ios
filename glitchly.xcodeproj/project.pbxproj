@@ -15,6 +15,19 @@
 		6D68827C1BC4587E001EE7F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D68827A1BC4587E001EE7F0 /* LaunchScreen.storyboard */; };
 		6D6882871BC4587E001EE7F0 /* glitchlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6882861BC4587E001EE7F0 /* glitchlyTests.swift */; };
 		6D6882921BC4587E001EE7F0 /* glitchlyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6882911BC4587E001EE7F0 /* glitchlyUITests.swift */; };
+		6D6882A01BC45903001EE7F0 /* LoginAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D68829F1BC45903001EE7F0 /* LoginAlertViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		6D6882A21BC46EB1001EE7F0 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6882A11BC46EB1001EE7F0 /* LoginManager.swift */; settings = {ASSET_TAGS = (); }; };
+		6D8823CB1BC489710076478D /* PictureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8823CA1BC489710076478D /* PictureProvider.swift */; settings = {ASSET_TAGS = (); }; };
+		6D8823CD1BC494920076478D /* FeedProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8823CC1BC494920076478D /* FeedProvider.swift */; settings = {ASSET_TAGS = (); }; };
+		6D8823CF1BC494B40076478D /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8823CE1BC494B40076478D /* Picture.swift */; settings = {ASSET_TAGS = (); }; };
+		6D8823D11BC4DC810076478D /* FeedPictureDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8823D01BC4DC810076478D /* FeedPictureDecorator.swift */; settings = {ASSET_TAGS = (); }; };
+		6D8823D31BC4DD0C0076478D /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8823D21BC4DD0C0076478D /* FeedController.swift */; settings = {ASSET_TAGS = (); }; };
+		6D93DF931BC4E32E000F0531 /* FeedPictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D93DF921BC4E32E000F0531 /* FeedPictureCell.swift */; settings = {ASSET_TAGS = (); }; };
+		6D93DF951BC5B85F000F0531 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D93DF941BC5B85F000F0531 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		6DDF18481BCB172000DA7124 /* CustomUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF18471BCB172000DA7124 /* CustomUIColor.swift */; settings = {ASSET_TAGS = (); }; };
+		6DDF184A1BCB1BBD00DA7124 /* VT323-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF18491BCB1BBD00DA7124 /* VT323-Regular.ttf */; settings = {ASSET_TAGS = (); }; };
+		6DDF184C1BCB494C00DA7124 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF184B1BCB494C00DA7124 /* Comment.swift */; settings = {ASSET_TAGS = (); }; };
+		970FE47F351E37B3BA2426CA /* Pods_glitchly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738431883FFFFEAB813E6684 /* Pods_glitchly.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E94CFC55D950F6CC5370A3D /* Pods-glitchly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-glitchly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-glitchly/Pods-glitchly.debug.xcconfig"; sourceTree = "<group>"; };
 		6D68826B1BC4587E001EE7F0 /* glitchly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = glitchly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D68826E1BC4587E001EE7F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D6882701BC4587E001EE7F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +63,20 @@
 		6D68828D1BC4587E001EE7F0 /* glitchlyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = glitchlyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D6882911BC4587E001EE7F0 /* glitchlyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = glitchlyUITests.swift; sourceTree = "<group>"; };
 		6D6882931BC4587E001EE7F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D68829F1BC45903001EE7F0 /* LoginAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAlertViewController.swift; sourceTree = "<group>"; };
+		6D6882A11BC46EB1001EE7F0 /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		6D8823CA1BC489710076478D /* PictureProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureProvider.swift; sourceTree = "<group>"; };
+		6D8823CC1BC494920076478D /* FeedProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedProvider.swift; sourceTree = "<group>"; };
+		6D8823CE1BC494B40076478D /* Picture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
+		6D8823D01BC4DC810076478D /* FeedPictureDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPictureDecorator.swift; sourceTree = "<group>"; };
+		6D8823D21BC4DD0C0076478D /* FeedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
+		6D93DF921BC4E32E000F0531 /* FeedPictureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPictureCell.swift; sourceTree = "<group>"; };
+		6D93DF941BC5B85F000F0531 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		6DDF18471BCB172000DA7124 /* CustomUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUIColor.swift; sourceTree = "<group>"; };
+		6DDF18491BCB1BBD00DA7124 /* VT323-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "VT323-Regular.ttf"; path = "../../../Desktop/VT323-Regular.ttf"; sourceTree = "<group>"; };
+		6DDF184B1BCB494C00DA7124 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		738431883FFFFEAB813E6684 /* Pods_glitchly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_glitchly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		992A3CD262E4F0CE7EC7C573 /* Pods-glitchly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-glitchly.release.xcconfig"; path = "Pods/Target Support Files/Pods-glitchly/Pods-glitchly.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				970FE47F351E37B3BA2426CA /* Pods_glitchly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,10 +108,13 @@
 		6D6882621BC4587E001EE7F0 = {
 			isa = PBXGroup;
 			children = (
+				6DDF18471BCB172000DA7124 /* CustomUIColor.swift */,
 				6D68826D1BC4587E001EE7F0 /* glitchly */,
 				6D6882851BC4587E001EE7F0 /* glitchlyTests */,
 				6D6882901BC4587E001EE7F0 /* glitchlyUITests */,
 				6D68826C1BC4587E001EE7F0 /* Products */,
+				98066DB3CC941D5983E9E521 /* Pods */,
+				E6CB66C25C09D9039B9F1D5E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,9 +135,20 @@
 				6D6882701BC4587E001EE7F0 /* ViewController.swift */,
 				6D6882721BC4587E001EE7F0 /* Main.storyboard */,
 				6D6882781BC4587E001EE7F0 /* Assets.xcassets */,
+				6DDF18491BCB1BBD00DA7124 /* VT323-Regular.ttf */,
 				6D68827A1BC4587E001EE7F0 /* LaunchScreen.storyboard */,
 				6D68827D1BC4587E001EE7F0 /* Info.plist */,
 				6D6882751BC4587E001EE7F0 /* glitchly.xcdatamodeld */,
+				6D68829F1BC45903001EE7F0 /* LoginAlertViewController.swift */,
+				6D6882A11BC46EB1001EE7F0 /* LoginManager.swift */,
+				6D8823CA1BC489710076478D /* PictureProvider.swift */,
+				6D8823CC1BC494920076478D /* FeedProvider.swift */,
+				6D8823CE1BC494B40076478D /* Picture.swift */,
+				6D8823D01BC4DC810076478D /* FeedPictureDecorator.swift */,
+				6D8823D21BC4DD0C0076478D /* FeedController.swift */,
+				6D93DF921BC4E32E000F0531 /* FeedPictureCell.swift */,
+				6D93DF941BC5B85F000F0531 /* ProfileViewController.swift */,
+				6DDF184B1BCB494C00DA7124 /* Comment.swift */,
 			);
 			path = glitchly;
 			sourceTree = "<group>";
@@ -128,6 +171,23 @@
 			path = glitchlyUITests;
 			sourceTree = "<group>";
 		};
+		98066DB3CC941D5983E9E521 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4E94CFC55D950F6CC5370A3D /* Pods-glitchly.debug.xcconfig */,
+				992A3CD262E4F0CE7EC7C573 /* Pods-glitchly.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E6CB66C25C09D9039B9F1D5E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				738431883FFFFEAB813E6684 /* Pods_glitchly.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +195,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6D6882961BC4587E001EE7F0 /* Build configuration list for PBXNativeTarget "glitchly" */;
 			buildPhases = (
+				4390D7DA05F289101439677C /* Check Pods Manifest.lock */,
 				6D6882671BC4587E001EE7F0 /* Sources */,
 				6D6882681BC4587E001EE7F0 /* Frameworks */,
 				6D6882691BC4587E001EE7F0 /* Resources */,
+				66AA4247A59E634172186E5F /* Embed Pods Frameworks */,
+				26291B1AAE390836B6386DCA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -233,6 +296,7 @@
 			files = (
 				6D68827C1BC4587E001EE7F0 /* LaunchScreen.storyboard in Resources */,
 				6D6882791BC4587E001EE7F0 /* Assets.xcassets in Resources */,
+				6DDF184A1BCB1BBD00DA7124 /* VT323-Regular.ttf in Resources */,
 				6D6882741BC4587E001EE7F0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,12 +317,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		26291B1AAE390836B6386DCA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-glitchly/Pods-glitchly-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4390D7DA05F289101439677C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		66AA4247A59E634172186E5F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-glitchly/Pods-glitchly-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6D6882671BC4587E001EE7F0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D93DF931BC4E32E000F0531 /* FeedPictureCell.swift in Sources */,
+				6D8823CF1BC494B40076478D /* Picture.swift in Sources */,
+				6D8823CB1BC489710076478D /* PictureProvider.swift in Sources */,
+				6DDF184C1BCB494C00DA7124 /* Comment.swift in Sources */,
+				6D6882A21BC46EB1001EE7F0 /* LoginManager.swift in Sources */,
+				6DDF18481BCB172000DA7124 /* CustomUIColor.swift in Sources */,
 				6D6882711BC4587E001EE7F0 /* ViewController.swift in Sources */,
+				6D8823CD1BC494920076478D /* FeedProvider.swift in Sources */,
+				6D93DF951BC5B85F000F0531 /* ProfileViewController.swift in Sources */,
+				6D8823D11BC4DC810076478D /* FeedPictureDecorator.swift in Sources */,
+				6D6882A01BC45903001EE7F0 /* LoginAlertViewController.swift in Sources */,
+				6D8823D31BC4DD0C0076478D /* FeedController.swift in Sources */,
 				6D6882771BC4587E001EE7F0 /* glitchly.xcdatamodeld in Sources */,
 				6D68826F1BC4587E001EE7F0 /* AppDelegate.swift in Sources */,
 			);
@@ -400,6 +523,7 @@
 		};
 		6D6882971BC4587E001EE7F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E94CFC55D950F6CC5370A3D /* Pods-glitchly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = glitchly/Info.plist;
@@ -411,6 +535,7 @@
 		};
 		6D6882981BC4587E001EE7F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 992A3CD262E4F0CE7EC7C573 /* Pods-glitchly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = glitchly/Info.plist;
@@ -487,6 +612,7 @@
 				6D6882981BC4587E001EE7F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D6882991BC4587E001EE7F0 /* Build configuration list for PBXNativeTarget "glitchlyTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +621,7 @@
 				6D68829B1BC4587E001EE7F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D68829C1BC4587E001EE7F0 /* Build configuration list for PBXNativeTarget "glitchlyUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +630,7 @@
 				6D68829E1BC4587E001EE7F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
