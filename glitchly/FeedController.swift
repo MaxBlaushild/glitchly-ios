@@ -14,29 +14,31 @@ class FeedController: UITableViewController {
     private let feedPictureDecorator = FeedPictureDecorator()
     private var feed:[Picture] = []
     private let loginManager = LoginManager()
+    private let navDecorator = NavDecorator()
+    private let labelDecorator = LabelDecorator()
 
     override func viewDidLoad() {
-        
-        let nav = self.navigationController?.navigationBar
-        nav?.tintColor = UIColor.whiteColor()
-        nav?.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "VT323", size: 22)! ]
-        nav?.barTintColor = UIColor(netHex: 0xFF6600)
-        self.view.backgroundColor = UIColor.blackColor()
-        UILabel.appearance().font = UIFont(name: "VT323", size: 22)
-        UILabel.appearance().textColor = UIColor(netHex: 0x0652ff)
-        
-        
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onFeedReceived:", name:"feedFetched", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onLoginCheck:", name:"loggedIn", object: nil)
+        // decorates the navbar
+        let nav = self.navigationController?.navigationBar
+        navDecorator.decorateNav(nav!)
+        
+        // decorates the labels
+        labelDecorator.decorateLabels()
+ 
+        self.view.backgroundColor = UIColor.blackColor()
+        
+        let defaultCenter = NSNotificationCenter.defaultCenter()
+        defaultCenter.addObserver(self, selector: "onFeedReceived:", name:"feedFetched", object: nil)
+        defaultCenter.addObserver(self, selector: "onLoginCheck:", name:"loggedIn", object: nil)
         
         loginManager.fetchCurrentUser()
     }
     
     func onLoginCheck(notification: NSNotification){
         
-        if notification.object as! Bool == true {
+        if (notification.object != nil) {
             
             feedProvider.getFeed()
             
@@ -97,8 +99,8 @@ class FeedController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> FeedPictureCell {
         let cell:FeedPictureCell = tableView.dequeueReusableCellWithIdentifier("feedPictureCell", forIndexPath: indexPath) as! FeedPictureCell
-        cell.backgroundColor = UIColor.blackColor()
-        _ = feedPictureDecorator.decorateCell(cell, picture: feed[indexPath.row])
+        
+        feedPictureDecorator.decorateCell(cell, picture: feed[indexPath.row])
 
         return cell
     }

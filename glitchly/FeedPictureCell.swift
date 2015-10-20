@@ -9,12 +9,14 @@
 import UIKit
 
 class FeedPictureCell: UITableViewCell {
+    
     @IBOutlet weak var pictureView: UIImageView!
     @IBOutlet weak var captionLabel: UILabel!
-    
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var userPic: UIImageView!
     @IBOutlet weak var username: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -40,10 +42,12 @@ class FeedPictureCell: UITableViewCell {
             if let data = NSData(contentsOfURL: url){
                 userPic.contentMode = UIViewContentMode.ScaleAspectFit
                 userPic.image = UIImage(data: data)
+                userPic.tag = user_id
             }
         }
         
         userLabel.text = username as String
+        userLabel.tag = user_id
     }
     
     func updatePicture(sUrl: String) {

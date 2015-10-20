@@ -15,7 +15,6 @@ class LoginAlertViewController: UIAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         let forgotPasswordAction = UIAlertAction(title: "Forgot Password", style: .Destructive) { (_) in }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }

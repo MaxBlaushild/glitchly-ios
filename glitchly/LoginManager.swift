@@ -13,64 +13,7 @@ import Locksmith
 import CoreData
 
 class LoginManager: NSObject {
-    
-    let context:NSManagedObjectContext
-    let entity:NSEntityDescription
-    
-    override init(){
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        self.context = appDelegate.managedObjectContext
-        self.entity = NSEntityDescription.entityForName("User", inManagedObjectContext: context)!
-    }
 
-    
-    private func upsertUserDataToCore(username: String, email: String, profile_url: String, thumb_url:String, id:Int){
-        
-        let request = NSFetchRequest(entityName: "User")
-        let predicate = NSPredicate(format: "id = %@", String(id))
-        request.predicate = predicate
-        request.fetchLimit = 1
-        
-        let result:[NSManagedObject]
-        
-        do {
-            
-            result = try context.executeFetchRequest(request) as! [NSManagedObject]
-            
-            if result.count > 0 {
-                addCurrentUserToCore(username, email: email, profile_url: profile_url, thumb_url:thumb_url, id: id)
-            }
-            
-        } catch {
-            
-            return
-            
-        }
-
-    }
-    
-    private func addCurrentUserToCore(username: String, email: String, profile_url: String, thumb_url:String, id:Int) {
-        
-        let user:NSManagedObject = NSManagedObject(entity: entity, insertIntoManagedObjectContext:context) as NSManagedObject
-        
-        user.setValue(username, forKey: "username")
-        user.setValue(profile_url, forKey: "profile_url")
-        user.setValue(thumb_url, forKey: "thumb_url")
-        user.setValue(email, forKey: "email")
-        user.setValue(id, forKey: "id")
-        
-        do {
-            
-            try context.save()
-            
-        } catch {
-            
-            print("you done goofed!")
-            
-        }
-        
-    }
-    
     func login(username:String, password:String) {
         
         let parameters = [
@@ -80,7 +23,7 @@ class LoginManager: NSObject {
             ]
         ]
         
-        Alamofire.request(.POST, "https://desolate-gorge-7593.herokuapp.com/login", parameters: parameters).responseJSON { request, response, result in
+        Alamofire.request(.POST, "http://159.203.86.38/login", parameters: parameters).responseJSON { request, response, result in
             
             let json = JSON(result.value!)
             let token:String = json["token"].string!
@@ -90,8 +33,10 @@ class LoginManager: NSObject {
                 
                 try Locksmith.updateData(["token": token], forUserAccount: "myUserAccount")
                 
-            } catch {
+                self.fetchCurrentUser()
                 
+            } catch {
+                // todo handle error properly
             }
         }
         
@@ -107,7 +52,7 @@ class LoginManager: NSObject {
                 "Authorization": "Token token=\(token)",
             ]
                 
-            let URL =  "https://desolate-gorge-7593.herokuapp.com/refresh-navbar"
+            let URL =  "http://159.203.86.38/refresh-navbar"
                 
             Alamofire.request(.GET, URL, headers: headers)
                 .responseJSON { request, response, result in
@@ -116,24 +61,27 @@ class LoginManager: NSObject {
                         
                         let json = JSON(result.value!)
                         let user = json["user"]
-                        self.upsertUserDataToCore(user["username"].string!, email: user["email"].string!, profile_url: user["profile_url"].string!, thumb_url: user["thumb_url"].string!, id: user["id"].int!)
+                        let newUser:User = User()
+                        newUser.username = user["username"].string!
+                        newUser.email = user["email"].string!
+                        newUser.profile_url = user["profile_url"].string!
+                        newUser.thumb_url = user["thumb_url"].string!
+                        newUser.id = user["id"].int!
                         
-                        
-                        
-                       NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: true)
+
+                        NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: newUser)
                         
                     } else {
                         
-                       NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: false)
+                       NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: nil)
                         
                     }
-
                     
             }
             
         } else {
             
-            NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: false)
+            NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: nil)
             
         }
     }

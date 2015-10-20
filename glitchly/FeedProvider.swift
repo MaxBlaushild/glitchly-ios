@@ -20,24 +20,25 @@ class FeedProvider: NSObject {
                 "Authorization": "Token token=\(token)",
             ]
             
-            let URL =  "https://desolate-gorge-7593.herokuapp.com"
+            let URL =  "http://159.203.86.38"
             
             //        let URL = "https://httpbin.org/get"
             
             Alamofire.request(.GET, URL, headers: headers)
                 .responseJSON { request, response, result in
                     let json = JSON(result.value!)
-                    let jsonPictures:JSON = json["pictures"] as JSON
+                    let jsonPictures:[JSON] = json["pictures"].array! as [JSON]
+                    
                     var pictures = [Picture]()
                     for picture in jsonPictures {
                         let newPic = Picture()
-                        newPic.url = picture.1["large_url"].string!
-                        newPic.caption = picture.1["caption"].string!
-                        newPic.creatorId = picture.1["user"]["id"].int!
-                        newPic.likes = picture.1["likes"].int!
-                        newPic.creatorName = picture.1["user"]["username"].string!
-                        newPic.creatorThumb = picture.1["user"]["thumb_url"].string!
-                        for comment in picture.1["comments"].array! {
+                        newPic.url = picture["large_url"].string!
+                        newPic.caption = picture["caption"].string!
+                        newPic.creatorId = picture["user"]["id"].int!
+                        newPic.likes = picture["likes"].int!
+                        newPic.creatorName = picture["user"]["username"].string!
+                        newPic.creatorThumb = picture["user"]["thumb_url"].string!
+                        for comment in picture["comments"].array! {
                             let newComment = Comment()
                             newComment.body = comment["body"].string!
                             newComment.id = comment["id"].int!
