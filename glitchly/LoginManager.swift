@@ -10,9 +10,10 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Locksmith
-import CoreData
 
 class LoginManager: NSObject {
+    
+    private let userSerializer = UserSerializer()
 
     func login(username:String, password:String) {
         
@@ -60,16 +61,10 @@ class LoginManager: NSObject {
                     if result.value != nil {
                         
                         let json = JSON(result.value!)
-                        let user = json["user"]
-                        let newUser:User = User()
-                        newUser.username = user["username"].string!
-                        newUser.email = user["email"].string!
-                        newUser.profile_url = user["profile_url"].string!
-                        newUser.thumb_url = user["thumb_url"].string!
-                        newUser.id = user["id"].int!
+                        let user = self.userSerializer.serializerUser(json)
                         
 
-                        NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: newUser)
+                        NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: user)
                         
                     } else {
                         

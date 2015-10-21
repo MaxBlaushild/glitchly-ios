@@ -56,6 +56,10 @@ class FeedController: UITableViewController {
         self.tableView.reloadData()
         
     }
+    
+    func sendTagToProfileController(){
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -140,14 +144,19 @@ class FeedController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ProfileSegue"
+        {
+            if let destinationVC = segue.destinationViewController as? ProfileViewController{
+                destinationVC.user_id = 3
+            }
+        }
     }
-    */
 
 }

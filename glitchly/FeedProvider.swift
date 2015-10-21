@@ -13,6 +13,8 @@ import Locksmith
 
 class FeedProvider: NSObject {
     
+    private let pictureSerializer = PictureSerializer()
+    
     func getFeed() {
         let user:Dictionary = Locksmith.loadDataForUserAccount("myUserAccount")!
         if let token:String = user["token"] as? String {
@@ -22,7 +24,6 @@ class FeedProvider: NSObject {
             
             let URL =  "http://159.203.86.38"
             
-            //        let URL = "https://httpbin.org/get"
             
             Alamofire.request(.GET, URL, headers: headers)
                 .responseJSON { request, response, result in
@@ -31,22 +32,7 @@ class FeedProvider: NSObject {
                     
                     var pictures = [Picture]()
                     for picture in jsonPictures {
-                        let newPic = Picture()
-                        newPic.url = picture["large_url"].string!
-                        newPic.caption = picture["caption"].string!
-                        newPic.creatorId = picture["user"]["id"].int!
-                        newPic.likes = picture["likes"].int!
-                        newPic.creatorName = picture["user"]["username"].string!
-                        newPic.creatorThumb = picture["user"]["thumb_url"].string!
-                        for comment in picture["comments"].array! {
-                            let newComment = Comment()
-                            newComment.body = comment["body"].string!
-                            newComment.id = comment["id"].int!
-                            newComment.username = comment["user"]["username"].string!
-                            newComment.user_id = comment["user"]["id"].int!
-                            newComment.user_thumb = comment["user"]["profile_url"].string!
-                            newPic.comments.append(newComment)
-                        }
+                        let newPic = self.pictureSerializer.serializePicture(picture)
                         pictures.append(newPic)
                     }
                     

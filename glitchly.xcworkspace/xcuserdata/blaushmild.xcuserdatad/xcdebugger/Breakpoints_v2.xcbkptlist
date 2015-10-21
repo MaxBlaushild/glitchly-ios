@@ -48,5 +48,53 @@
             </Actions>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "glitchly/ProfileProvider.swift"
+            timestampString = "467088860.125312"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "getUserProfile(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "glitchly.ProfileProvider.getUserProfile (glitchly.ProfileProvider)(Swift.Int) -&gt; ()"
+                  moduleName = "glitchly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/blaushmild/mobile_development/glitchly/glitchly/ProfileProvider.swift"
+                  timestampString = "467085867.512594"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "1953">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "glitchly.ProfileProvider.(getUserProfile (glitchly.ProfileProvider) -&gt; (Swift.Int) -&gt; ()).(closure #1)"
+                  moduleName = "glitchly"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/blaushmild/mobile_development/glitchly/glitchly/ProfileProvider.swift"
+                  timestampString = "467085867.512797"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "359">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

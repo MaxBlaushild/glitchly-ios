@@ -9,9 +9,20 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    
+    var user_id:Int = 0
+    
+    private let profileDecorator = ProfileDecorator()
+    private let profileProvider = ProfileProvider()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onUserRecieved:", name:"userFetched", object: nil)
+        profileProvider.getUserProfile(user_id)
 
         // Do any additional setup after loading the view.
     }
@@ -19,6 +30,16 @@ class ProfileViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func onUserRecieved(notification: NSNotification){
+        
+        if let user = notification.object as? User {
+            profileDecorator.decorateProfilePicture(profilePicture, user: user)
+            profileDecorator.decorateUsernameLabel(usernameLabel, user: user)
+        }
+        
+        
     }
     
 
