@@ -10,17 +10,24 @@ import UIKit
 
 class ProfileDecorator: NSObject {
     
-    func decorateProfilePicture(profilePic: UIImageView, user: User) {
-        if let url = NSURL(string: user.profile_url) {
-            if let data = NSData(contentsOfURL: url){
-                profilePic.contentMode = UIViewContentMode.ScaleAspectFit
-                profilePic.image = UIImage(data: data)
-            }
-        }
+    // ask giorgio best practice for this situation
+    
+    func fetchProfilePicture(user: User) -> UIImage {
+        
+        let url = NSURL(string: user.profile_url)
+        let data = NSData(contentsOfURL: url!)
+        return UIImage(data: data!)!
+
+    }
+
+    
+    func fetchCollectionCellPicture(picture:Picture) -> UIImage {
+        
+        let url = NSURL(string: picture.url)
+        let data = NSData(contentsOfURL: url!)
+        return UIImage(data: data!)!
+
     }
     
-    func decorateUsernameLabel(usernameLabel: UILabel, user: User) {
-        usernameLabel.text = user.username
-    }
 
 }

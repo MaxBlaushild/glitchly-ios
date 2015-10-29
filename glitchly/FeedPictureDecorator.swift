@@ -13,9 +13,13 @@ class FeedPictureDecorator: NSObject {
     func decorateCell(cell:FeedPictureCell, picture:Picture) {
         
         cell.backgroundColor = UIColor.blackColor()
-        cell.updateCaption(picture.caption)
-        cell.updatePicture(picture.url)
-        cell.updateUserWidget(picture.creatorName, user_thumb: picture.creatorThumb, user_id: picture.creatorId)
+        cell.picture = picture
+        cell.updatePicture()
+        cell.updateUserWidget()
+        cell.updateComments()
+        cell.updateLikes()
+        cell.upDateLikeButton()
+        
         
     }
 

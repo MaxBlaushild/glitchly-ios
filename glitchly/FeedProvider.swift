@@ -36,7 +36,7 @@ class FeedProvider: NSObject {
                         pictures.append(newPic)
                     }
                     
-                NSNotificationCenter.defaultCenter().postNotificationName("feedFetched", object: pictures)
+                    NSNotificationCenter.defaultCenter().postNotificationName("feedFetched", object: pictures)
                     
                 }
             

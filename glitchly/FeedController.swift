@@ -16,6 +16,9 @@ class FeedController: UITableViewController {
     private let loginManager = LoginManager()
     private let navDecorator = NavDecorator()
     private let labelDecorator = LabelDecorator()
+    private var currentUser:User = User()
+
+    @IBOutlet weak var profileButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +43,8 @@ class FeedController: UITableViewController {
         
         if (notification.object != nil) {
             
+            currentUser = notification.object as! User
+            profileButton.tag = currentUser.id
             feedProvider.getFeed()
             
         } else {
@@ -57,8 +62,14 @@ class FeedController: UITableViewController {
         
     }
     
-    func sendTagToProfileController(){
-        
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ProfileSegue"
+        {
+            if let destinationVC = segue.destinationViewController as? ProfileViewController{
+                destinationVC.user_id = sender!.tag
+                destinationVC.currentUser = currentUser
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,6 +119,7 @@ class FeedController: UITableViewController {
 
         return cell
     }
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -149,14 +161,5 @@ class FeedController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
 
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ProfileSegue"
-        {
-            if let destinationVC = segue.destinationViewController as? ProfileViewController{
-                destinationVC.user_id = 3
-            }
-        }
-    }
 
 }

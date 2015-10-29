@@ -10,6 +10,7 @@ import UIKit
 
 class Picture: NSObject {
 
+    var id: Int = 0
     var url:String = ""
     var likes:Int = 0
     var caption:String = ""
@@ -17,6 +18,7 @@ class Picture: NSObject {
     var creatorId:Int = 0
     var creatorThumb:String = ""
     var comments:[Comment] = []
+    var likedByUser:Bool = false
 
 
 }

@@ -15,5 +15,7 @@ class User: NSObject {
     var profile_url:String = ""
     var thumb_url:String = ""
     var id:Int = 0
+    var pictures:[Picture] = [Picture]()
+    var followedByUser:Bool = false
 
 }

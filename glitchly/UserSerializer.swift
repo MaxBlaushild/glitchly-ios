@@ -11,6 +11,8 @@ import SwiftyJSON
 
 class UserSerializer: NSObject {
     
+    let pictureSerializer = PictureSerializer()
+    
     func serializerUser(json:JSON) -> User {
         let user = json["user"]
         let newUser:User = User()
@@ -19,6 +21,12 @@ class UserSerializer: NSObject {
         newUser.profile_url = user["profile_url"].string!
         newUser.thumb_url = user["thumb_url"].string!
         newUser.id = user["id"].int!
+        newUser.followedByUser = user["followed_by_user"].bool!
+        for picture in user["pictures"].array! {
+            let newPic = pictureSerializer.serializeUserPicture(picture)
+            newUser.pictures.append(newPic)
+        }
+        
         return newUser
     }
 

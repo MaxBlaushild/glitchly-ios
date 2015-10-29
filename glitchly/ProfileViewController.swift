@@ -8,16 +8,22 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UICollectionViewDataSource {
     
+    @IBOutlet weak var followOrUnfollowButton: UIButton!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var profilePictureCollection: UICollectionView!
     
     var user_id:Int = 0
+    var currentUser:User = User()
     
     private let profileDecorator = ProfileDecorator()
     private let profileProvider = ProfileProvider()
-
+    private var user:User = User()
+    private let followManager = FollowManager()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +31,26 @@ class ProfileViewController: UIViewController {
         profileProvider.getUserProfile(user_id)
 
         // Do any additional setup after loading the view.
+        
+        profilePictureCollection.dataSource = self
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("profilePictureCell", forIndexPath: indexPath) as! ProfilePictureCell
+        
+        cell.imageView.image = profileDecorator.fetchCollectionCellPicture(user.pictures[indexPath.row])
+        
+        return cell
+    }
+
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return user.pictures.count
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,14 +60,43 @@ class ProfileViewController: UIViewController {
     
     func onUserRecieved(notification: NSNotification){
         
-        if let user = notification.object as? User {
-            profileDecorator.decorateProfilePicture(profilePicture, user: user)
-            profileDecorator.decorateUsernameLabel(usernameLabel, user: user)
+        if let fetchedUser = notification.object as? User {
+            user = fetchedUser
+            renderFetchedUser()
         }
-        
         
     }
     
+    func renderFetchedUser(){
+        
+        profilePicture.image = profileDecorator.fetchProfilePicture(user)
+        usernameLabel.text = user.username
+        renderFollowUnfollowButton()
+        profilePictureCollection.reloadData()
+        
+    }
+    
+    func renderFollowUnfollowButton(){
+        if currentUser.id == user.id {
+            followOrUnfollowButton.removeFromSuperview()
+        } else {
+            if user.followedByUser {
+                followOrUnfollowButton.setTitle("Unfollow", forState: .Normal)
+            } else {
+                followOrUnfollowButton.setTitle("Follow", forState: .Normal)
+            }
+        }
+
+    }
+    
+    @IBAction func followOrUnfollow(sender: AnyObject) {
+        user.followedByUser ? followManager.unfollowUser(user.id) : followManager.followUser(user.id)
+        user.followedByUser = !user.followedByUser
+        renderFollowUnfollowButton()
+    }
+    
+    
+
 
     /*
     // MARK: - Navigation

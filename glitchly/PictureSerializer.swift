@@ -18,7 +18,9 @@ class PictureSerializer: NSObject {
         newPic.creatorId = picture["user"]["id"].int!
         newPic.likes = picture["likes"].int!
         newPic.creatorName = picture["user"]["username"].string!
+        newPic.likedByUser = picture["liked_by_user"].bool!
         newPic.creatorThumb = picture["user"]["thumb_url"].string!
+        newPic.id = picture["id"].int!
         for comment in picture["comments"].array! {
             let newComment = Comment()
             newComment.body = comment["body"].string!
@@ -28,6 +30,14 @@ class PictureSerializer: NSObject {
             newComment.user_thumb = comment["user"]["profile_url"].string!
             newPic.comments.append(newComment)
         }
+        return newPic
+    }
+    
+    func serializeUserPicture(picture:JSON) -> Picture {
+        let newPic = Picture()
+        newPic.url = picture["large_url"].string!
+        newPic.caption = picture["caption"].string!
+        newPic.id = picture["id"].int!
         return newPic
     }
 

@@ -10,17 +10,49 @@ import UIKit
 
 class FeedPictureCell: UITableViewCell {
     
+    @IBOutlet weak var userPic: UIButton!
     @IBOutlet weak var pictureView: UIImageView!
-    @IBOutlet weak var captionLabel: UILabel!
-    @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet weak var userPic: UIImageView!
-    @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var topUserLabel: UIButton!
+    @IBOutlet weak var likesButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var commentsButton: UIButton!
     
+    var picture:Picture = Picture()
+    
+    let likeManager = LikeManager()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let doubleTap = UITapGestureRecognizer(target:self, action:Selector("toggleLikeStatus:"))
+        doubleTap.numberOfTapsRequired = 2
+        pictureView.userInteractionEnabled = true
+        pictureView.addGestureRecognizer(doubleTap)
     }
+    
+
+    @IBAction func toggleLikeStatus(sender: AnyObject) {
+        
+        if picture.likedByUser {
+            
+            likeManager.unlikePicture(picture.id)
+            picture.likedByUser = !picture.likedByUser
+            picture.likes--
+            updateLikes()
+            upDateLikeButton()
+            
+        } else {
+            
+            likeManager.likePicture(picture.id)
+            picture.likedByUser = !picture.likedByUser
+            picture.likes++
+            upDateLikeButton()
+            updateLikes()
+            
+        }
+        
+    }
+
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -30,33 +62,71 @@ class FeedPictureCell: UITableViewCell {
 
     
     // MARK: IRenderSong implementation
-    func updateCaption(caption: String) {
-        
-        captionLabel.text = caption as String
-        
-    }
     
-    func updateUserWidget(username: String, user_thumb: String, user_id: Int){
+    func updateUserWidget(){
         
-        if let url = NSURL(string: user_thumb) {
+        if let url = NSURL(string: picture.creatorThumb) {
             if let data = NSData(contentsOfURL: url){
-                userPic.contentMode = UIViewContentMode.ScaleAspectFit
-                userPic.image = UIImage(data: data)
-                userPic.tag = user_id
+                let image = UIImage(data: data)
+                userPic.frame = CGRectMake(25, 25, 25, 25)
+                userPic.setBackgroundImage(image, forState: .Normal)
+                userPic.tag = picture.creatorId
             }
         }
         
-        userLabel.text = username as String
-        userLabel.tag = user_id
+        topUserLabel.setTitle(picture.creatorName, forState: .Normal)
+        topUserLabel.tag = picture.creatorId
     }
     
-    func updatePicture(sUrl: String) {
+    func updateLikes() {
         
-        if let url = NSURL(string: sUrl) {
+        let title:String
+        
+        if picture.likes == 1 {
+            title = "1 like"
+        } else {
+            title = "\(picture.likes) likes"
+        }
+
+       likesButton.setTitle(title, forState: .Normal)
+    }
+    
+    func updateComments() {
+        
+        let title:String
+        let numberOfComments = picture.comments.count
+        
+        if numberOfComments == 1 {
+            title = "1 comment"
+        } else {
+            title = "\(numberOfComments) comments"
+        }
+        
+        commentsButton.setTitle(title, forState: .Normal)
+    }
+    
+    func updatePicture() {
+        
+        if let url = NSURL(string: picture.url) {
             if let data = NSData(contentsOfURL: url){
-                pictureView.contentMode = UIViewContentMode.ScaleAspectFit
                 pictureView.image = UIImage(data: data)
             }
+        }
+        
+    }
+    
+    func upDateLikeButton(){
+        
+        if (picture.likedByUser) {
+            
+            let image = UIImage(named:"red-heart.png")
+            likeButton.setImage(image, forState: .Normal)
+                
+        } else {
+            
+            let image = UIImage(named:"heart.png")
+            likeButton.setImage(image, forState: .Normal)
+            
         }
         
     }
