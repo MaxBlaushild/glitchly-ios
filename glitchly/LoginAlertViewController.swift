@@ -10,28 +10,10 @@ import UIKit
 
 class LoginAlertViewController: UIAlertController {
     
-    var loginManager = LoginManager()
+//    let loginAPIController:LoginAPIController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let forgotPasswordAction = UIAlertAction(title: "Forgot Password", style: .Destructive) { (_) in }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
-        
-        let loginAction = UIAlertAction(title: "Login", style: .Default) { (_) in
-            let loginTextField = self.textFields![0] as UITextField
-            let passwordTextField = self.textFields![1] as UITextField
-            
-            self.loginManager.login(loginTextField.text!, password: passwordTextField.text!)
-        }
-        
-//        loginAction.enabled = false
-        
-        self.addAction(loginAction)
-        self.addAction(forgotPasswordAction)
-        self.addAction(cancelAction)
-        
 
         // Do any additional setup after loading the view.
     }

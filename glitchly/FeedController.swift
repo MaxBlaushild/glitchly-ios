@@ -10,33 +10,22 @@ import UIKit
 
 class FeedController: UITableViewController {
     
-    private let feedProvider = FeedProvider()
+    private let feedAPIController = FeedAPIController()
     private let feedPictureDecorator = FeedPictureDecorator()
     private var feed:[Picture] = []
-    private let loginManager = LoginManager()
-    private let navDecorator = NavDecorator()
-    private let labelDecorator = LabelDecorator()
-    private var currentUser:User = User()
+    private let loginAPIController = LoginAPIController()
+    private var currentUser:User!
 
     @IBOutlet weak var profileButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // decorates the navbar
-        let nav = self.navigationController?.navigationBar
-        navDecorator.decorateNav(nav!)
-        
-        // decorates the labels
-        labelDecorator.decorateLabels()
- 
-        self.view.backgroundColor = UIColor.blackColor()
-        
         let defaultCenter = NSNotificationCenter.defaultCenter()
         defaultCenter.addObserver(self, selector: "onFeedReceived:", name:"feedFetched", object: nil)
         defaultCenter.addObserver(self, selector: "onLoginCheck:", name:"loggedIn", object: nil)
         
-        loginManager.fetchCurrentUser()
+        loginAPIController.fetchCurrentUser()
     }
     
     func onLoginCheck(notification: NSNotification){
@@ -45,7 +34,7 @@ class FeedController: UITableViewController {
             
             currentUser = notification.object as! User
             profileButton.tag = currentUser.id
-            feedProvider.getFeed()
+            feedAPIController.getFeed()
             
         } else {
             
@@ -63,11 +52,16 @@ class FeedController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ProfileSegue"
-        {
+        if segue.identifier == "ProfileSegue" {
             if let destinationVC = segue.destinationViewController as? ProfileViewController{
                 destinationVC.user_id = sender!.tag
                 destinationVC.currentUser = currentUser
+                destinationVC.feedProvider = feedAPIController
+            }
+        } else if segue.identifier! == "feedToSearchSegue" {
+            if let destinationVC = segue.destinationViewController as? FoundUsersTableViewController {
+                destinationVC.currentUser = currentUser
+                destinationVC.feedProvider = feedAPIController
             }
         }
     }
@@ -89,6 +83,23 @@ class FeedController: UITableViewController {
             textField.placeholder = "Password"
             textField.secureTextEntry = true
         }
+        
+        let forgotPasswordAction = UIAlertAction(title: "Forgot Password", style: .Destructive) { (_) in }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+        
+        let loginAction = UIAlertAction(title: "Login", style: .Default) { (_) in
+            let loginTextField = loginAlert.textFields![0] as UITextField
+            let passwordTextField = loginAlert.textFields![1] as UITextField
+            
+            self.loginAPIController.login(loginTextField.text!, password: passwordTextField.text!)
+        }
+        
+        //        loginAction.enabled = false
+        
+        loginAlert.addAction(loginAction)
+        loginAlert.addAction(forgotPasswordAction)
+        loginAlert.addAction(cancelAction)
         
         self.presentViewController(loginAlert, animated: true){
             
@@ -118,6 +129,23 @@ class FeedController: UITableViewController {
         feedPictureDecorator.decorateCell(cell, picture: feed[indexPath.row])
 
         return cell
+    }
+    
+    override func viewWillLayoutSubviews(){
+        
+        self.view.backgroundColor = UIColor.blackColor()
+        
+        // decorates the navbar
+        let nav = self.navigationController?.navigationBar
+        nav!.tintColor = UIColor.whiteColor()
+        nav!.barTintColor = UIColor(netHex: 0xFF6600)
+        
+        
+        // decorates the labels
+        let labelAppearance = UILabel.appearance()
+        labelAppearance.font = UIFont(name: "VT323", size: 22)
+        labelAppearance.textColor = UIColor(netHex: 0x0652ff)
+        
     }
     
 

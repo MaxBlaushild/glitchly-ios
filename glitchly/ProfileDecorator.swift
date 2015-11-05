@@ -21,7 +21,7 @@ class ProfileDecorator: NSObject {
     }
 
     
-    func fetchCollectionCellPicture(picture:Picture) -> UIImage {
+    func fetchCollectionCellPicture(picture:ProfileShowPicture) -> UIImage {
         
         let url = NSURL(string: picture.url)
         let data = NSData(contentsOfURL: url!)

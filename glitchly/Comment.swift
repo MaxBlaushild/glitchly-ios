@@ -7,13 +7,22 @@
 //
 
 import UIKit
+import SwiftyJSON
 
-class Comment: NSObject {
+class Comment: NSObject, IsSerializedFromJSON {
     
-    var body:String = ""
-    var id:Int = 0
-    var username:String = ""
-    var user_id:Int = 0
-    var user_thumb:String = ""
+    var body:String
+    var id:Int
+    var username:String
+    var user_id:Int
+    var user_thumb:String
+    
+    required init(json:JSON) {
+        self.body = json["body"].string!
+        self.id = json["id"].int!
+        self.username = json["user"]["username"].string!
+        self.user_id = json["user"]["id"].int!
+        self.user_thumb = json["user"]["profile_url"].string!
+    }
 
 }

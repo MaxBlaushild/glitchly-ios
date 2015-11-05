@@ -17,9 +17,9 @@ class FeedPictureCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
     
-    var picture:Picture = Picture()
+    var picture:Picture!
     
-    let likeManager = LikeManager()
+    let likeAPIController = LikeAPIController()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,7 +35,7 @@ class FeedPictureCell: UITableViewCell {
         
         if picture.likedByUser {
             
-            likeManager.unlikePicture(picture.id)
+            likeAPIController.unlikePicture(picture.id)
             picture.likedByUser = !picture.likedByUser
             picture.likes--
             updateLikes()
@@ -43,7 +43,7 @@ class FeedPictureCell: UITableViewCell {
             
         } else {
             
-            likeManager.likePicture(picture.id)
+            likeAPIController.likePicture(picture.id)
             picture.likedByUser = !picture.likedByUser
             picture.likes++
             upDateLikeButton()

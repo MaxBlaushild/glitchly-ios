@@ -15,23 +15,24 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profilePictureCollection: UICollectionView!
     
-    var user_id:Int = 0
-    var currentUser:User = User()
+    // passed over from feedcontroller
+    var feedProvider:FeedAPIController!
+    var user_id:Int!
+    var currentUser:User!
     
     private let profileDecorator = ProfileDecorator()
-    private let profileProvider = ProfileProvider()
+    private let profileAPIController = ProfileAPIController()
     private var user:User = User()
-    private let followManager = FollowManager()
-    
+    private let followAPIController = FollowAPIController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onUserRecieved:", name:"userFetched", object: nil)
-        profileProvider.getUserProfile(user_id)
-
-        // Do any additional setup after loading the view.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onFollowStatusToggledInAPI:", name:"followStatusToggled", object: nil)
         
+        profileAPIController.getUserProfile(user_id)
+
         profilePictureCollection.dataSource = self
         
     }
@@ -51,6 +52,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return user.pictures.count
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,8 +63,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
     func onUserRecieved(notification: NSNotification){
         
         if let fetchedUser = notification.object as? User {
+            
             user = fetchedUser
             renderFetchedUser()
+            
         }
         
     }
@@ -70,6 +74,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
     func renderFetchedUser(){
         
         profilePicture.image = profileDecorator.fetchProfilePicture(user)
+        profilePicture.frame = CGRect(x: 25, y: 25, width: 50, height: 50)
         usernameLabel.text = user.username
         renderFollowUnfollowButton()
         profilePictureCollection.reloadData()
@@ -77,22 +82,44 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
     }
     
     func renderFollowUnfollowButton(){
+        
         if currentUser.id == user.id {
+            
             followOrUnfollowButton.removeFromSuperview()
+            
         } else {
+            
             if user.followedByUser {
+                
                 followOrUnfollowButton.setTitle("Unfollow", forState: .Normal)
+                
             } else {
+                
                 followOrUnfollowButton.setTitle("Follow", forState: .Normal)
+                
             }
         }
 
     }
     
     @IBAction func followOrUnfollow(sender: AnyObject) {
-        user.followedByUser ? followManager.unfollowUser(user.id) : followManager.followUser(user.id)
+        
+        user.followedByUser ? followAPIController.unfollowUser(user.id) : followAPIController.followUser(user.id)
+        
+    }
+    
+    func onFollowStatusToggledInAPI(notification:NSNotification){
+        
         user.followedByUser = !user.followedByUser
         renderFollowUnfollowButton()
+        resetFeed()
+        
+    }
+    
+    func resetFeed(){
+        
+        feedProvider.getFeed()
+        
     }
     
     
