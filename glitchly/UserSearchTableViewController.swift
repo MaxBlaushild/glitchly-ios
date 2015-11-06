@@ -91,7 +91,7 @@ class UserSearchTableViewController: UITableViewController, UISearchResultsUpdat
         if segue.identifier! == "searchToProfileSegue"
         {
             if let destinationVC = segue.destinationViewController as? ProfileViewController{
-                destinationVC.user_id = sender!.tag
+                destinationVC.userId = sender!.tag
                 destinationVC.currentUser = currentUser
                 destinationVC.feedAPIController = feedAPIController
             }
@@ -101,6 +101,13 @@ class UserSearchTableViewController: UITableViewController, UISearchResultsUpdat
     override func viewDidDisappear(animated: Bool) {
         searchController.active = false
     }
+    
+    override func viewWillLayoutSubviews(){
+        
+        self.view.backgroundColor = UIColor.blackColor()
+        
+    }
+
 
     
 

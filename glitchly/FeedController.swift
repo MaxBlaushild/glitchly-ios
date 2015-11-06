@@ -25,7 +25,7 @@ class FeedController: UITableViewController {
         defaultCenter.addObserver(self, selector: "onFeedReceived:", name:"feedFetched", object: nil)
         defaultCenter.addObserver(self, selector: "onLoginCheck:", name:"loggedIn", object: nil)
         
-        loginService.fetchSession()
+        loginService.fetchCurrentUser()
     }
     
     func onLoginCheck(notification: NSNotification){
@@ -50,8 +50,10 @@ class FeedController: UITableViewController {
     }
     
     func initializeCurrentUser(user:User){
+        
         currentUser = user
         profileButton.tag = currentUser.id
+        
     }
     
     func onFeedReceived(notification: NSNotification){
@@ -62,21 +64,6 @@ class FeedController: UITableViewController {
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ProfileSegue" {
-            if let destinationVC = segue.destinationViewController as? ProfileViewController{
-                destinationVC.user_id = sender!.tag
-                destinationVC.currentUser = currentUser
-                destinationVC.feedAPIController = feedAPIController
-            }
-        } else if segue.identifier! == "feedToSearchSegue" {
-            if let destinationVC = segue.destinationViewController as? UserSearchTableViewController {
-                destinationVC.currentUser = currentUser
-                destinationVC.feedAPIController = feedAPIController
-            }
-        }
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -155,9 +142,30 @@ class FeedController: UITableViewController {
         // decorates the labels
         let labelAppearance = UILabel.appearance()
         labelAppearance.font = UIFont(name: "VT323", size: 22)
-        labelAppearance.textColor = UIColor(netHex: 0x0652ff)
+//        labelAppearance.textColor = UIColor(netHex: 0x0652ff)
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ProfileSegue" {
+            if let destinationVC = segue.destinationViewController as? ProfileViewController{
+                destinationVC.userId = sender!.tag
+                destinationVC.currentUser = currentUser
+                destinationVC.feedAPIController = feedAPIController
+            }
+        } else if segue.identifier! == "feedToSearchSegue" {
+            if let destinationVC = segue.destinationViewController as? UserSearchTableViewController {
+                destinationVC.currentUser = currentUser
+                destinationVC.feedAPIController = feedAPIController
+            }
+        } else if segue.identifier! == "feedToNotificationsSegue" {
+            if let destinationVC = segue.destinationViewController as? NotificationsTableViewController {
+                destinationVC.currentUser = currentUser
+                destinationVC.feedAPIController = feedAPIController
+            }
+        }
+    }
+
     
 
     /*

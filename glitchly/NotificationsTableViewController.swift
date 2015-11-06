@@ -13,6 +13,10 @@ class NotificationsTableViewController: UITableViewController {
     private let notificationsAPIController:NotificationAPIController = NotificationAPIController()
     private let notificationsTableViewCellDecorator:NotificationsTableViewCellDecorator = NotificationsTableViewCellDecorator()
     private var notifications:[Notification] = [Notification]()
+    
+    // received from segue
+    var currentUser:User!
+    var feedAPIController:FeedAPIController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +63,20 @@ class NotificationsTableViewController: UITableViewController {
 
     func renderNotificationCell(cell: NotificationsTableViewCell, notification:Notification) {
         
-        cell.textLabel!.text = notification.body
+        cell.notificationLabel!.text = notification.body
         cell.tag = notification.segueId
         cell.notificationImageView.image = notificationsTableViewCellDecorator.fetchNotificationPicture(notification.displayPictureURL)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier! == "notificationsToPictureShowSegue"
+        {
+            if let destinationVC = segue.destinationViewController as? PictureShowViewController{
+                destinationVC.pictureId = sender!.tag
+                destinationVC.currentUser = currentUser
+                destinationVC.feedAPIController = feedAPIController
+            }
+        }
     }
     /*
     // Override to support conditional editing of the table view.
@@ -107,5 +122,12 @@ class NotificationsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func viewWillLayoutSubviews(){
+        
+        self.view.backgroundColor = UIColor.blackColor()
+        
+    }
+
 
 }

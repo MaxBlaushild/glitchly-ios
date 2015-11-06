@@ -30,6 +30,7 @@
 		6D6882A01BC45903001EE7F0 /* LoginAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D68829F1BC45903001EE7F0 /* LoginAlertViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		6D6882A21BC46EB1001EE7F0 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6882A11BC46EB1001EE7F0 /* LoginService.swift */; settings = {ASSET_TAGS = (); }; };
 		6D79418C1BED1A7B0015E481 /* ProtectedAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D79418B1BED1A7B0015E481 /* ProtectedAPIController.swift */; settings = {ASSET_TAGS = (); }; };
+		6D79418E1BED2CE00015E481 /* PictureShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D79418D1BED2CE00015E481 /* PictureShowViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		6D8823CB1BC489710076478D /* PictureAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8823CA1BC489710076478D /* PictureAPIController.swift */; settings = {ASSET_TAGS = (); }; };
 		6D8823CD1BC494920076478D /* FeedAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8823CC1BC494920076478D /* FeedAPIController.swift */; settings = {ASSET_TAGS = (); }; };
 		6D8823CF1BC494B40076478D /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8823CE1BC494B40076478D /* Picture.swift */; settings = {ASSET_TAGS = (); }; };
@@ -99,6 +100,7 @@
 		6D68829F1BC45903001EE7F0 /* LoginAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAlertViewController.swift; sourceTree = "<group>"; };
 		6D6882A11BC46EB1001EE7F0 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		6D79418B1BED1A7B0015E481 /* ProtectedAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtectedAPIController.swift; sourceTree = "<group>"; };
+		6D79418D1BED2CE00015E481 /* PictureShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureShowViewController.swift; sourceTree = "<group>"; };
 		6D8823CA1BC489710076478D /* PictureAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureAPIController.swift; sourceTree = "<group>"; };
 		6D8823CC1BC494920076478D /* FeedAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedAPIController.swift; sourceTree = "<group>"; };
 		6D8823CE1BC494B40076478D /* Picture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				6D68829F1BC45903001EE7F0 /* LoginAlertViewController.swift */,
 				6D320BDE1BE8039D006F687F /* UserSearchTableViewController.swift */,
 				6DDACAD51BEAB87900A52A46 /* NotificationsTableViewController.swift */,
+				6D79418D1BED2CE00015E481 /* PictureShowViewController.swift */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				6D5DE45E1BDAE0F1007CB0B0 /* ProfilePictureCell.swift in Sources */,
 				6D93DF951BC5B85F000F0531 /* ProfileViewController.swift in Sources */,
 				6DDACAD61BEAB87900A52A46 /* NotificationsTableViewController.swift in Sources */,
+				6D79418E1BED2CE00015E481 /* PictureShowViewController.swift in Sources */,
 				6D8823D11BC4DC810076478D /* FeedPictureDecorator.swift in Sources */,
 				6D5DE45A1BDAD476007CB0B0 /* ProfilePictureCollection.swift in Sources */,
 				6DDACADA1BEAB93F00A52A46 /* APIController.swift in Sources */,

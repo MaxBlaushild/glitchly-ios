@@ -7,7 +7,27 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class PictureAPIController: ProtectedAPIController {
+    
+    func getPicture(pictureId: Int) {
+        
+        let url = apiURL + "/pictures/\(pictureId)"
+        
+        Alamofire.request(.GET, url, headers: headers)
+            .responseJSON { request, response, result in
+                
+                let json = JSON(result.value!)
+                
+                let jsonPicture:JSON = json["picture"]
 
+                let picture = Picture(json: jsonPicture)
+                
+                NSNotificationCenter.defaultCenter().postNotificationName("pictureFetched", object: picture)
+                
+        }
+        
+    }
 }

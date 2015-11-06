@@ -33,7 +33,7 @@ class LoginService: APIController {
                 
                 try Locksmith.updateData(["token": token], forUserAccount: "myUserAccount")
                 
-                self.fetchSession()
+                self.fetchCurrentUser()
                 
             } catch {
                 
@@ -44,7 +44,7 @@ class LoginService: APIController {
         
     }
     
-    func fetchSession() {
+    func fetchCurrentUser() {
         
         let URL =  apiURL + "/refresh-navbar"
         

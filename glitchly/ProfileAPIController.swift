@@ -14,6 +14,8 @@ import Locksmith
 
 class ProfileAPIController: ProtectedAPIController {
     
+    private let followAPIController:FollowAPIController = FollowAPIController()
+    
     func getUserProfile(user_id: Int){
 
         let URL =  apiURL + "/users/\(user_id)"
@@ -28,5 +30,17 @@ class ProfileAPIController: ProtectedAPIController {
                 NSNotificationCenter.defaultCenter().postNotificationName("userFetched", object: user)
                 
         }
+    }
+    
+    func followUser(user_id: Int){
+        
+        followAPIController.followUser(user_id)
+        
+    }
+    
+    func unfollowUser(user_id: Int){
+        
+        followAPIController.unfollowUser(user_id)
+        
     }
 }

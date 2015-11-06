@@ -15,13 +15,12 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profilePictureCollection: UICollectionView!
     
-    // api controllers
+    // api controller
     private let profileAPIController = ProfileAPIController()
-    private let followAPIController = FollowAPIController()
     
     // passed over from feedcontroller
     var feedAPIController:FeedAPIController!
-    var user_id:Int!
+    var userId:Int!
     var currentUser:User!
     
     private let profileDecorator = ProfileDecorator()
@@ -33,7 +32,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onUserRecieved:", name:"userFetched", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onFollowStatusToggledInAPI:", name:"followStatusToggled", object: nil)
         
-        profileAPIController.getUserProfile(user_id)
+        profileAPIController.getUserProfile(userId)
 
         profilePictureCollection.dataSource = self
         
@@ -42,7 +41,9 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("profilePictureCell", forIndexPath: indexPath) as! ProfilePictureCell
         
-        cell.imageView.image = profileDecorator.fetchCollectionCellPicture(user.pictures[indexPath.row])
+        let profileShowPicture = user.pictures[indexPath.row]
+        cell.imageView.image = profileDecorator.fetchCollectionCellPicture(profileShowPicture)
+        cell.tag = profileShowPicture.id
         
         return cell
     }
@@ -87,7 +88,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
         
         if currentUser.id == user.id {
             
-            followOrUnfollowButton.removeFromSuperview()
+            followOrUnfollowButton.hidden = true                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
             
         } else {
             
@@ -106,7 +107,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
     
     @IBAction func followOrUnfollow(sender: AnyObject) {
         
-        user.followedByUser ? followAPIController.unfollowUser(user.id) : followAPIController.followUser(user.id)
+        user.followedByUser ? profileAPIController.unfollowUser(user.id) : profileAPIController.followUser(user.id)
         
     }
     
@@ -122,6 +123,17 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
         
         feedAPIController.getFeed()
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier! == "profileToPictureShowSegue"
+        {
+            if let destinationVC = segue.destinationViewController as? PictureShowViewController{
+                destinationVC.pictureId = sender!.tag
+                destinationVC.currentUser = currentUser
+                destinationVC.feedAPIController = feedAPIController
+            }
+        }
     }
 
     

@@ -9,13 +9,16 @@
 import UIKit
 
 class UserSearchTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var followOrUnfollowButton: UIButton!
-
-    @IBAction func followOrUnfollow(sender: AnyObject) {
-    }
+//
+//    @IBAction func followOrUnfollow(sender: AnyObject) {
+//    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        textLabel!.textColor = UIColor.whiteColor()
+        textLabel!.font = UIFont(name: "VT323", size: 22)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
