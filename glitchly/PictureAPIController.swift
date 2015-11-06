@@ -8,6 +8,6 @@
 
 import UIKit
 
-class PictureAPIController: APIController {
+class PictureAPIController: ProtectedAPIController {
 
 }

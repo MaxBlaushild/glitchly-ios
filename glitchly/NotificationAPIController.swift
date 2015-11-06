@@ -7,7 +7,28 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
-class NotificationAPIController: APIController {
+class NotificationAPIController: ProtectedAPIController {
+    
+    func getNotifications(page: Int){
+        
+        let url = apiURL + "/notifications?page=\(page)"
+        
+        Alamofire.request(.GET, url, headers: headers)
+            .responseJSON { request, response, result in
+    
+                let json = JSON(result.value!)
+    
+                var notifications:[Notification] = [Notification]()
+                for notification in json["notifications"].array! {
+                    notifications.append(Notification(json: notification))
+                }
+    
+                NSNotificationCenter.defaultCenter().postNotificationName("notificationsFetched", object: notifications)
+    
+        }
+    }
 
 }

@@ -34,18 +34,26 @@
         <scene sceneID="9au-cE-SiM">
             <objects>
                 <tableViewController id="PUE-tw-dA1" customClass="NotificationsTableViewController" customModule="glitchly" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Vr-tg-h4v">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="59" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Vr-tg-h4v">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="eDr-pH-rTY">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationsTableViewCell" rowHeight="59" id="eDr-pH-rTY" customClass="NotificationsTableViewCell" customModule="glitchly" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="59"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eDr-pH-rTY" id="pVQ-f3-fIs">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="58"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r91-4u-1Dg">
+                                            <rect key="frame" x="19" y="4" width="50" height="50"/>
+                                        </imageView>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="notificationImageView" destination="r91-4u-1Dg" id="99e-4L-XV0"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -58,10 +66,10 @@
             </objects>
             <point key="canvasLocation" x="64" y="-859"/>
         </scene>
-        <!--Found Users Table View Controller-->
+        <!--User Search Table View Controller-->
         <scene sceneID="cIu-Za-Knr">
             <objects>
-                <tableViewController id="0Rm-hp-Mn2" customClass="FoundUsersTableViewController" customModule="glitchly" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="0Rm-hp-Mn2" customClass="UserSearchTableViewController" customModule="glitchly" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="VDn-Ut-LlS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -232,7 +240,7 @@
                             </barButtonItem>
                             <barButtonItem title="Notifications" id="IB1-O9-aCh">
                                 <connections>
-                                    <segue destination="PUE-tw-dA1" kind="show" id="JXi-YU-PQz"/>
+                                    <segue destination="PUE-tw-dA1" kind="show" identifier="notificationsSegue" id="JXi-YU-PQz"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
@@ -359,6 +367,6 @@
         <image name="heart.png" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="p6g-ef-wl8"/>
+        <segue reference="Jqg-mK-IHT"/>
     </inferredMetricsTieBreakers>
 </document>

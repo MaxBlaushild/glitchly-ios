@@ -12,7 +12,7 @@ import SwiftyJSON
 import Locksmith
 
 
-class ProfileAPIController: APIController {
+class ProfileAPIController: ProtectedAPIController {
     
     func getUserProfile(user_id: Int){
 

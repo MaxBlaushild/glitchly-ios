@@ -10,10 +10,10 @@ import UIKit
 
 class FeedController: UITableViewController {
     
-    private let feedAPIController = FeedAPIController()
+    private var feedAPIController:FeedAPIController!
+    private let loginService:LoginService = LoginService()
     private let feedPictureDecorator = FeedPictureDecorator()
     private var feed:[Picture] = []
-    private let loginAPIController = LoginAPIController()
     private var currentUser:User!
 
     @IBOutlet weak var profileButton: UIBarButtonItem!
@@ -25,22 +25,33 @@ class FeedController: UITableViewController {
         defaultCenter.addObserver(self, selector: "onFeedReceived:", name:"feedFetched", object: nil)
         defaultCenter.addObserver(self, selector: "onLoginCheck:", name:"loggedIn", object: nil)
         
-        loginAPIController.fetchCurrentUser()
+        loginService.fetchSession()
     }
     
     func onLoginCheck(notification: NSNotification){
         
         if (notification.object != nil) {
             
-            currentUser = notification.object as! User
-            profileButton.tag = currentUser.id
-            feedAPIController.getFeed()
+            initializeCurrentUser(notification.object as! User)
+            initializeFeed()
             
         } else {
             
             createLoginAlert()
             
         }
+    }
+    
+    func initializeFeed(){
+        
+        feedAPIController = FeedAPIController()
+        feedAPIController.getFeed()
+        
+    }
+    
+    func initializeCurrentUser(user:User){
+        currentUser = user
+        profileButton.tag = currentUser.id
     }
     
     func onFeedReceived(notification: NSNotification){
@@ -56,12 +67,12 @@ class FeedController: UITableViewController {
             if let destinationVC = segue.destinationViewController as? ProfileViewController{
                 destinationVC.user_id = sender!.tag
                 destinationVC.currentUser = currentUser
-                destinationVC.feedProvider = feedAPIController
+                destinationVC.feedAPIController = feedAPIController
             }
         } else if segue.identifier! == "feedToSearchSegue" {
-            if let destinationVC = segue.destinationViewController as? FoundUsersTableViewController {
+            if let destinationVC = segue.destinationViewController as? UserSearchTableViewController {
                 destinationVC.currentUser = currentUser
-                destinationVC.feedProvider = feedAPIController
+                destinationVC.feedAPIController = feedAPIController
             }
         }
     }
@@ -92,7 +103,7 @@ class FeedController: UITableViewController {
             let loginTextField = loginAlert.textFields![0] as UITextField
             let passwordTextField = loginAlert.textFields![1] as UITextField
             
-            self.loginAPIController.login(loginTextField.text!, password: passwordTextField.text!)
+            self.loginService.login(loginTextField.text!, password: passwordTextField.text!)
         }
         
         //        loginAction.enabled = false

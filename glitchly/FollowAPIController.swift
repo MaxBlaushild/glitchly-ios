@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import Locksmith
 
-class FollowAPIController: APIController {
+class FollowAPIController: ProtectedAPIController {
 
     func followUser(user_id: Int){
         

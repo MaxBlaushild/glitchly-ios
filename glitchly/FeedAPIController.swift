@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import Locksmith
 
-class FeedAPIController: APIController {
+class FeedAPIController: ProtectedAPIController {
     
     func getFeed() {
             

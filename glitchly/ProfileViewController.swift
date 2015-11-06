@@ -15,15 +15,17 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var profilePictureCollection: UICollectionView!
     
+    // api controllers
+    private let profileAPIController = ProfileAPIController()
+    private let followAPIController = FollowAPIController()
+    
     // passed over from feedcontroller
-    var feedProvider:FeedAPIController!
+    var feedAPIController:FeedAPIController!
     var user_id:Int!
     var currentUser:User!
     
     private let profileDecorator = ProfileDecorator()
-    private let profileAPIController = ProfileAPIController()
     private var user:User = User()
-    private let followAPIController = FollowAPIController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,10 +120,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource {
     
     func resetFeed(){
         
-        feedProvider.getFeed()
+        feedAPIController.getFeed()
         
     }
-    
+
     
 
 

@@ -11,7 +11,7 @@ import Locksmith
 import SwiftyJSON
 import Alamofire
 
-class UserSearchAPIController: APIController {
+class UserSearchAPIController: ProtectedAPIController {
     
     func searchForUsers(username: String) {
             

@@ -8,14 +8,16 @@
 
 import UIKit
 
-class FoundUsersTableViewController: UITableViewController, UISearchResultsUpdating {
+class UserSearchTableViewController: UITableViewController, UISearchResultsUpdating {
 
-    let searchController = UISearchController(searchResultsController: nil)
-    let userSearchAPIController = UserSearchAPIController()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private let userSearchAPIController = UserSearchAPIController()
+    private let userSearchCellDecorator = UserSearchCellDecorator()
+    
     private var users:[User] = []
     
     var currentUser:User!
-    var feedProvider:FeedAPIController!
+    var feedAPIController:FeedAPIController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,7 @@ class FoundUsersTableViewController: UITableViewController, UISearchResultsUpdat
         
         let defaultCenter = NSNotificationCenter.defaultCenter()
         defaultCenter.addObserver(self, selector: "onUsersFetched:", name:"usersFetched", object: nil)
+
         
     }
 
@@ -77,15 +80,7 @@ class FoundUsersTableViewController: UITableViewController, UISearchResultsUpdat
         
         cell.textLabel!.text = user.username
         cell.tag = user.id
-        
-        let buttonLabel:String!
-        
-        if (user.followedByUser){
-           buttonLabel = "Unfollow"
-        } else {
-            buttonLabel = "Follow"
-        }
-        cell.followOrUnfollowButton.setTitle(buttonLabel, forState: .Normal)
+        userSearchCellDecorator.decorateFollowUnfollowButton(cell, user: user)
         
         return cell
     }
@@ -98,7 +93,7 @@ class FoundUsersTableViewController: UITableViewController, UISearchResultsUpdat
             if let destinationVC = segue.destinationViewController as? ProfileViewController{
                 destinationVC.user_id = sender!.tag
                 destinationVC.currentUser = currentUser
-                destinationVC.feedProvider = feedProvider
+                destinationVC.feedAPIController = feedAPIController
             }
         }
     }
@@ -106,6 +101,7 @@ class FoundUsersTableViewController: UITableViewController, UISearchResultsUpdat
     override func viewDidDisappear(animated: Bool) {
         searchController.active = false
     }
+
     
 
     /*

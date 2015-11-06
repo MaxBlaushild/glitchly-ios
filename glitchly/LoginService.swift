@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import Locksmith
 
-class LoginAPIController: APIController {
+class LoginService: APIController {
 
     func login(username:String, password:String) {
         
@@ -29,44 +29,46 @@ class LoginAPIController: APIController {
             let json = JSON(result.value!)
             let token:String = json["token"].string!
             
-            
             do {
                 
                 try Locksmith.updateData(["token": token], forUserAccount: "myUserAccount")
                 
-                self.fetchCurrentUser()
+                self.fetchSession()
                 
             } catch {
+                
                 // todo handle error properly
+                
             }
         }
         
     }
     
-    func fetchCurrentUser() {
-
+    func fetchSession() {
+        
         let URL =  apiURL + "/refresh-navbar"
-            
+        
+        let headers = ProtectedAPIController.setHeaders()
+        
         Alamofire.request(.GET, URL, headers: headers)
             .responseJSON { request, response, result in
-            
-            if result.value != nil {
                 
-                let json = JSON(result.value!)
-                let user = User(json:json["user"])
-                
-
-                NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: user)
-                
-            } else {
-                
-               NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: nil)
-                
-            }
+                if result.value != nil {
+                    
+                    let json = JSON(result.value!)["user"]
+                    
+                    let user = User(json: json)
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: user)
+                    
+                } else {
+                    
+                    NSNotificationCenter.defaultCenter().postNotificationName("loggedIn", object: nil)
+                    
+                }
                 
         }
-
+        
     }
-
     
 }

@@ -11,26 +11,6 @@ import Locksmith
 
 class APIController: NSObject {
     
-    let apiURL:String
-    let headers:Dictionary<String, String>
-    
-    override init(){
-        
-        apiURL = "http://159.203.86.38"
-        
-        headers = APIController.setHeaders(Locksmith.loadDataForUserAccount("myUserAccount")!)
-
-    }
-    
-    static func setHeaders(tokenWrapper: Dictionary<String, AnyObject>) -> Dictionary<String, String> {
-        
-        let token = tokenWrapper["token"] as! String
-        
-        let headers = [
-            "Authorization": "Token token=\(token)"
-        ]
-        
-        return headers
-    }
+    let apiURL:String = "http://159.203.86.38"
 
 }

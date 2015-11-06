@@ -11,7 +11,7 @@ import Alamofire
 import Locksmith
 
 
-class LikeAPIController: APIController {
+class LikeAPIController: ProtectedAPIController {
     
     func likePicture(picture_id: Int){
             
@@ -20,7 +20,7 @@ class LikeAPIController: APIController {
             ]
         ]
         
-        let URL =  "http://159.203.86.38/pictures/\(picture_id)/likes"
+        let URL =  apiURL + "/pictures/\(picture_id)/likes"
         
         Alamofire.request(.POST, URL, parameters: like, headers: headers)
             .responseJSON { request, response, result in
@@ -32,7 +32,7 @@ class LikeAPIController: APIController {
     
     func unlikePicture(picture_id: Int){
         
-        let URL =  "http://159.203.86.38/pictures/\(picture_id)/likes"
+        let URL = apiURL + "/pictures/\(picture_id)/likes"
         
         Alamofire.request(.DELETE, URL, headers: headers)
             .responseJSON { request, response, result in
