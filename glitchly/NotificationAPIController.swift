@@ -22,7 +22,9 @@ class NotificationAPIController: ProtectedAPIController {
                 let json = JSON(result.value!)
     
                 var notifications:[Notification] = [Notification]()
+                
                 for notification in json["notifications"].array! {
+                    
                     notifications.append(Notification(json: notification))
                 }
     

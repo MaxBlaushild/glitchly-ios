@@ -64,15 +64,9 @@ class FeedPictureCell: UITableViewCell {
     // MARK: IRenderSong implementation
     
     func updateUserWidget(){
-        
-        if let url = NSURL(string: picture.creatorThumb) {
-            if let data = NSData(contentsOfURL: url){
-                let image = UIImage(data: data)
-                userPic.frame = CGRectMake(25, 25, 25, 25)
-                userPic.setBackgroundImage(image, forState: .Normal)
-                userPic.tag = picture.creatorId
-            }
-        }
+        userPic.imageFromUrl(picture.creatorThumb)
+        userPic.tag = picture.creatorId
+        userPic.frame = CGRectMake(25, 25, 25, 25)
         
         topUserLabel.setTitle(picture.creatorName, forState: .Normal)
         topUserLabel.tag = picture.creatorId
@@ -107,12 +101,8 @@ class FeedPictureCell: UITableViewCell {
     
     func updatePicture() {
         
-        if let url = NSURL(string: picture.url) {
-            if let data = NSData(contentsOfURL: url){
-                pictureView.image = UIImage(data: data)
-            }
-        }
-        
+        pictureView.imageFromUrl(picture.url)
+
     }
     
     func upDateLikeButton(){
